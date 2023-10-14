@@ -15,7 +15,7 @@ class ActronZonesCard extends HTMLElement {
     const entityId = this.config.entity;
     const state = hass.states[entityId];
     //const stateStr = state ? state.state : "unavailable";
-    const stateStr = state ? Object.entries(state) : "unavailable";
+    const stateStr = state ? Object.entries(state).toString() : "unavailable";
 
     this.content.innerHTML = `
       The state of ${entityId} is ${stateStr}!
