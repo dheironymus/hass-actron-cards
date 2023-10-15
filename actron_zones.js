@@ -13,17 +13,19 @@ class ActronZonesCard extends HTMLElement {
     }
 
     // get the device Id so we can find the related entities
-    const entityId = this.config.entity;
-    const coreEntity = hass.entities[entityId];
+    const coreEntityId = this.config.entity;
+    const coreEntity = hass.entities[coreEntityId];
     if (!coreEntity) {
-      throw new Error(`Could not find entity ${entityId}`);
+      throw new Error(`Could not find entity ${coreEntityId}`);
     }
     const deviceId = coreEntity.device_id;
 
     // find the zones associated with the core entity
     let zones = [];
     for (const [id, entity] of Object.entries(hass.entities)) {
-      if (entity.device_id == deviceId && id != entityId) {
+      if (id == deviceId && 
+          id.startsWith("climate.") &&
+          id != coreEntityId) {
         zones.push(id);
       }
     }    
