@@ -12,30 +12,26 @@ class ActronZonesCard extends HTMLElement {
       this.content = this.querySelector("div");
     }
 
-    const entityId = this.config.entity;
-    const state = hass.states[entityId];
-    //const stateStr = state ? state.state : "unavailable";
-    const stateStr = state ? Object.entries(state.context).toString() : "unavailable";
-
     // get the device Id so we can find the related entities
-    const deviceName = this.config.device;
-    console.log(`Device is ${deviceName}, and there are ${hass.devices.size} devices`);
+    const entityId = this.config.entity;
+    const coreEntity = hass.entities[entityId];
+    if (!coreEntity) {
+      throw new Error(`Could not find entity ${entityId}`);
+    }
+    const deviceId = coreEntity.device_id;
 
-    let deviceId = null;
-    for (const [id, device] of Object.entries(hass.devices)) {
-      console.log(`Looking at ${device.id}, named ${device.name_by_user}`);
-      if (device.name_by_user == deviceName) {
-        deviceId = id;
-        break;
+    // find the zones associated with the core entity
+    let zones = [];
+    for (const [id, entity] of Object.entries(hass.entities)) {
+      if (entity.device_id == deviceId && id != entityId) {
+        zones.push(id);
       }
-    }
-    
-    if (!deviceId) {
-      throw new Error(`Unable to find device ${deviceName}`);
-    }
+    }    
     
     this.content.innerHTML = `
-      The id of ${deviceName} is ${deviceId}
+      The device id of ${entityId} is ${deviceId}
+      <br><br>
+      Found ${zones.length} zones!
       <br><br>
     `;
   }
