@@ -24,7 +24,7 @@ class ActronZonesCard extends HTMLElement {
     console.log(`${Object.entries(hass.devices).toString()}`);
     console.log(`Map? ${hass.devices instanceof Map}`);
     console.log(`Array? ${Array.isArray(hass.devices)}`);
-    console.log(`id? ${device_id(deviceName)}`);
+
     let deviceId = null;
     for (let [id, device] of hass.devices) {
       console.log(`Looking at ${device.id}, named ${device.name_by_user}`);
