@@ -21,7 +21,7 @@ class ActronZonesCard extends HTMLElement {
     const deviceName = this.config.device;
     console.log(`Device is ${deviceName}, and there are ${hass.devices.size} devices`);
     console.log(`${Object.entries(hass.devices).toString()}`);
-    console.log(`Map? ${hass.devices instanceof Map}`;
+    console.log(`Map? ${hass.devices instanceof Map}`);
     console.log(`Array? ${Array.isArray(hass.devices)}`);
     let deviceId = null;
     for (let [id, device] of hass.devices) {
