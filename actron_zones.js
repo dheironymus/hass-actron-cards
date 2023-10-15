@@ -23,8 +23,8 @@ class ActronZonesCard extends HTMLElement {
     // find the zones associated with the core entity
     let zones = [];
     for (const [id, entity] of Object.entries(hass.entities)) {
-      if (id == deviceId && 
-          //id.startsWith("climate.") &&
+      if (entity.device_id == deviceId && 
+          id.startsWith("climate.") &&
           id != coreEntityId) {
         zones.push(id);
         console.log(id);
