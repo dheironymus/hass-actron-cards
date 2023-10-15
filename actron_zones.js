@@ -31,7 +31,7 @@ class ActronZonesCard extends HTMLElement {
     }    
     
     this.content.innerHTML = `
-      The device id of ${entityId} is ${deviceId}
+      The device id of ${coreEntityId} is ${deviceId}
       <br><br>
       Found ${zones.length} zones!
       <br><br>
