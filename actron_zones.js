@@ -19,21 +19,9 @@ class ActronZonesCard extends HTMLElement {
 
     // get the device Id so we can find the related entities
     const deviceName = this.config.device;
-    console.log(`my map is ${Object.entries(hass.devices).length}`);
     console.log(`Device is ${deviceName}, and there are ${hass.devices.size} devices`);
-    console.log(`${Object.entries(hass.devices).toString()}`);
-    console.log(`Map? ${hass.devices instanceof Map}`);
-    console.log(`Array? ${Array.isArray(hass.devices)}`);
 
     let deviceId = null;
-    for (let [id, device] of hass.devices) {
-      console.log(`Looking at ${device.id}, named ${device.name_by_user}`);
-      if (device.name_by_user == deviceName) {
-        deviceId = hass.devices[i].id;
-        break;
-      }
-    }
-
     for (const [id, device] of Object.entries(hass.devices)) {
       console.log(`Looking at ${device.id}, named ${device.name_by_user}`);
       if (device.name_by_user == deviceName) {
