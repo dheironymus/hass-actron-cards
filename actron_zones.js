@@ -20,6 +20,7 @@ class ActronZonesCard extends HTMLElement {
     // get the device Id so we can find the related entities
     const deviceName = this.config.device;
     console.log(`Device is ${deviceName}, and there are ${hass.devices.size} devices`);
+    console.log(`${Object.entries(hass.devices).toString()}`);
     let deviceId = null;
     for (let [id, device] of hass.devices) {
       console.log(`Looking at ${device.id}, named ${device.name_by_user}`);
