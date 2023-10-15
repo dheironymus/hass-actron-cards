@@ -17,8 +17,22 @@ class ActronZonesCard extends HTMLElement {
     //const stateStr = state ? state.state : "unavailable";
     const stateStr = state ? Object.entries(state.context).toString() : "unavailable";
 
+    // get the device Id so we can find the related entities
+    const deviceName = this.config.device;
+    deviceId = nil;
+    for (let i = 0; i < hass.devices.length; i++) {
+      if (hass.devices[i].name_by_user == deviceName) {
+        deviceId = hass.devices[i].id;
+        break;
+      }
+    }
+
+    if (!deviceId) {
+      throw new Error("Unable to find device " + deviceName);
+    }
+    
     this.content.innerHTML = `
-      The state of ${entityId} is ${stateStr}!
+      The id of ${deviceName} is ${deviceId}
       <br><br>
     `;
   }
