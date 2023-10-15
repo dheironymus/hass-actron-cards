@@ -25,7 +25,7 @@ class ActronZonesCard extends HTMLElement {
     for (const [id, device] of Object.entries(hass.devices)) {
       console.log(`Looking at ${device.id}, named ${device.name_by_user}`);
       if (device.name_by_user == deviceName) {
-        deviceId = hass.devices[i].id;
+        deviceId = id;
         break;
       }
     }
